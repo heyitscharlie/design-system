@@ -94,7 +94,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    /* Temporary: bg-gradient-brand here (not bg-background) so the token
+     * is visible as the actual page background while it's being tuned —
+     * swap back to bg-background once it's dialed in. */
+    @apply bg-gradient-brand text-foreground;
     font-family: var(--palette-font-body);
   }
   /* Smooth-scrolls the nav's #anchor links. Gated behind

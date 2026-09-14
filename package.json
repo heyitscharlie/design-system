@@ -1,6 +1,6 @@
 {
   "name": "@heyitscharlie/design-system",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Charlie Martins' centralised design system — shared React components, tokens, and docs for future projects.",
   "type": "module",
   "license": "MIT",

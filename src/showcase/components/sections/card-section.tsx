@@ -5,10 +5,11 @@ export function CardSection() {
   return (
     <div className="grid max-w-3xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {cardSamples.map((sample) => (
-        <div key={sample.title} className="flex flex-col gap-2">
+        <div key={sample.variant} className="flex flex-col gap-2">
           <Card variant={sample.variant}>
             <CardTitle>{sample.title}</CardTitle>
             <CardDescription>{sample.description}</CardDescription>
+            <p className="text-sm opacity-70">{sample.attribution}</p>
             <CardFooter>
               {sample.tags.map((tag) => (
                 <span key={tag}>{tag}</span>

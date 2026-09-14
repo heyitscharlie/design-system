@@ -145,6 +145,7 @@ export const typeSamples: TypeSample[] = [
 ];
 
 export const typeSampleText = "I am serious, and don't call me Shirley.";
+export const typeSampleAttribution = '— Dr. Rumack, Airplane! (1980)';
 
 export interface ButtonVariantSample {
   variant: NonNullable<VariantProps<typeof buttonVariants>['variant']>;
@@ -192,6 +193,7 @@ export const inputSamples: InputSample[] = [
 export interface CardSample {
   title: string;
   description: string;
+  attribution: string;
   tags: string[];
   variant: NonNullable<VariantProps<typeof cardVariants>['variant']>;
 }
@@ -203,7 +205,8 @@ export interface CardSample {
 const CARD_SAMPLE_COPY = {
   title: 'Sample Card',
   description:
-    'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.',
+    'Striker, listen, and you listen close: flying a plane is no different than riding a bicycle, just a lot harder to put baseball cards in the spokes.',
+  attribution: '— Rex Kramer, Airplane! (1980)',
   tags: ['Svelte', 'Tailwind'],
 };
 

@@ -1,5 +1,5 @@
 import { Typography } from '../../../design-system/typography';
-import { typeSamples, typeSampleText } from '../../content';
+import { typeSampleAttribution, typeSamples, typeSampleText } from '../../content';
 
 export function TypographySection() {
   return (
@@ -10,6 +10,7 @@ export function TypographySection() {
           <Typography variant={sample.variant}>{typeSampleText}</Typography>
         </div>
       ))}
+      <div className="text-muted-foreground pl-32 font-mono text-[11px]">{typeSampleAttribution}</div>
     </div>
   );
 }

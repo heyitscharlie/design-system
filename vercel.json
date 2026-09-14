@@ -1,0 +1,4 @@
+{
+  "buildCommand": "npm run build:showcase",
+  "outputDirectory": "dist-showcase"
+}

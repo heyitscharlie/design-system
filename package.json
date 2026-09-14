@@ -28,6 +28,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:showcase": "vite build --config vite.config.showcase.ts",
     "lint": "oxlint",
     "preview": "vite preview",
     "prepublishOnly": "npm run build"

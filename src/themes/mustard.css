@@ -33,8 +33,8 @@
   /* Pre-faded accent for --gradient (index.css) — hardcoded rgba, not
    * color-mix(var(--accent), ...): see the long comment on --gradient
    * for why computing this live isn't safe. */
-  --gradient-tint-a: rgba(143, 99, 10, 0.04);
-  --gradient-tint-b: rgba(143, 99, 10, 0.03);
+  --gradient-tint-a: rgba(143, 99, 10, 0.14);
+  --gradient-tint-b: rgba(143, 99, 10, 0.10);
   --border: color-mix(in srgb, #151514 12%, transparent);
   --input: color-mix(in srgb, #151514 12%, transparent);
   --ring: var(--accent);
@@ -56,8 +56,8 @@
   --accent: #f8dba0;
   /* dark ink clears 13.8:1 here; this light accent can't carry white text */
   --accent-foreground: #141311;
-  --gradient-tint-a: rgba(248, 219, 160, 0.04);
-  --gradient-tint-b: rgba(248, 219, 160, 0.03);
+  --gradient-tint-a: rgba(248, 219, 160, 0.14);
+  --gradient-tint-b: rgba(248, 219, 160, 0.10);
   --border: color-mix(in srgb, #f5f5f4 12%, transparent);
   --input: color-mix(in srgb, #f5f5f4 12%, transparent);
   --ring: var(--accent);

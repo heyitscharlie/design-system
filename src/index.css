@@ -89,7 +89,13 @@
 }
 
 @utility bg-gradient-brand {
-  background-image: var(--gradient);
+  /* background (shorthand), NOT background-image: --gradient's last
+   * layer (var(--background)) is a plain color, and background-image
+   * only accepts <image> values — a trailing color makes the whole
+   * declaration invalid, silently dropped, so body rendered with no
+   * background at all (plain white) in every mode. Only the shorthand
+   * permits a trailing background-color. */
+  background: var(--gradient);
 }
 
 /* Heading font/weight is NOT applied here via a blanket h1-h4 selector —

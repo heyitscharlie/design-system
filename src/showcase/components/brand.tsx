@@ -1,6 +1,7 @@
 import { WordMark } from './word-mark';
 import { Typography } from '../../design-system/typography';
 import { cn } from '../../design-system/lib/utils';
+import { siteCopy } from '../content';
 
 /** The wordmark + "design-system" label, as one reusable unit — used both
  * in the sidebar's own header (stacked, left-aligned) and, when the
@@ -21,7 +22,7 @@ export function Brand({
     <div className={cn('flex gap-2', className)}>
       <WordMark className={cn('text-primary', markClassName)} />
       <Typography variant="subheading" className={textClassName}>
-        design-system
+        {siteCopy.brandLabel}
       </Typography>
     </div>
   );

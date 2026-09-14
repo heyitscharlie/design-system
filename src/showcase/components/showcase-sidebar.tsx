@@ -11,7 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '../ui/sidebar';
-import type { NavGroup } from '../content';
+import { siteCopy, type NavGroup } from '../content';
 
 /** The showcase page's sidebar — brand mark + search up top, filtered nav
  * groups below. Presentational only: filtering happens in App.tsx (it
@@ -35,7 +35,7 @@ export function ShowcaseSidebar({
         <SearchInput
           value={query}
           onChange={(e) => onQueryChange(e.target.value)}
-          placeholder="Search"
+          placeholder={siteCopy.searchPlaceholder}
         />
       </SidebarHeader>
       <SidebarContent>
@@ -58,7 +58,7 @@ export function ShowcaseSidebar({
           </SidebarGroup>
         ))}
         {groups.length === 0 && (
-          <div className="text-muted-foreground px-4 py-2 text-sm">No matches</div>
+          <div className="text-muted-foreground px-4 py-2 text-sm">{siteCopy.noMatches}</div>
         )}
       </SidebarContent>
     </Sidebar>

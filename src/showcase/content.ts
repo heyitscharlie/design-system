@@ -196,28 +196,21 @@ export interface CardSample {
   variant: NonNullable<VariantProps<typeof cardVariants>['variant']>;
 }
 
+// Same title/description/tags across every sample, varying only `variant`
+// — a variant comparison needs identical content, or a height difference
+// from one sample's copy just happening to be longer reads as a sizing
+// bug in the component itself.
+const CARD_SAMPLE_COPY = {
+  title: 'Sample Card',
+  description:
+    'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.',
+  tags: ['Svelte', 'Tailwind'],
+};
+
 export const cardSamples: CardSample[] = [
-  {
-    title: 'Adipiscing Widget',
-    description:
-      'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.',
-    tags: ['Svelte', 'Tailwind'],
-    variant: 'primary',
-  },
-  {
-    title: 'Elit Runner',
-    description:
-      'Et harum quidem rerum facilis est et expedita distinctio nam libero tempore cum soluta nobis est eligendi optio cumque.',
-    tags: ['Go', 'Cobra'],
-    variant: 'primary-transparent',
-  },
-  {
-    title: 'Voluptas Engine',
-    description:
-      'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem.',
-    tags: ['Rust', 'Axum'],
-    variant: 'card-transparent',
-  },
+  { ...CARD_SAMPLE_COPY, variant: 'primary' },
+  { ...CARD_SAMPLE_COPY, variant: 'primary-transparent' },
+  { ...CARD_SAMPLE_COPY, variant: 'card-transparent' },
 ];
 
 export const toggleSamples: { label: string; defaultPressed?: boolean; disabled?: boolean }[] = [

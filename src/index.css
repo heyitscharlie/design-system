@@ -94,8 +94,17 @@
    * only accepts <image> values — a trailing color makes the whole
    * declaration invalid, silently dropped, so body rendered with no
    * background at all (plain white) in every mode. Only the shorthand
-   * permits a trailing background-color. */
+   * permits a trailing background-color.
+   *
+   * background-attachment: fixed anchors the two corner blobs to the
+   * VIEWPORT's corners rather than the element's own box. Without it, on
+   * any page taller than one screen the blobs sit at fixed y-coordinates
+   * in the document — scroll past them and you're just looking at flat
+   * --background with no blob in view, which reads as the gradient
+   * "repeating" in patches down the page rather than one continuous
+   * ambient wash that's always visible regardless of scroll position. */
   background: var(--gradient);
+  background-attachment: fixed;
 }
 
 /* Heading font/weight is NOT applied here via a blanket h1-h4 selector —

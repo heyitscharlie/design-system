@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { cn } from './design-system/lib/utils';
 import { ModeToggle } from './design-system/mode-toggle';
 import { PaletteSwitcher } from './design-system/palette-switcher';
 import { ThemeProvider } from './design-system/theme-provider';
@@ -9,6 +10,7 @@ import { CollapsedBrand } from './showcase/components/collapsed-brand';
 import { FaviconSync } from './showcase/components/favicon-sync';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from './showcase/ui/sidebar';
 import { useActiveSection } from './showcase/hooks/use-active-section';
+import { useScrolled } from './showcase/hooks/use-scrolled';
 import { nav, navSectionIds, pageGroups, pageIntro, siteCopy } from './showcase/content';
 
 /** The showcase page — composition and layout only. No copy, no design
@@ -18,6 +20,7 @@ import { nav, navSectionIds, pageGroups, pageIntro, siteCopy } from './showcase/
 function App() {
   const [query, setQuery] = useState('');
   const activeId = useActiveSection(navSectionIds);
+  const scrolled = useScrolled();
 
   const filteredNav = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -37,7 +40,12 @@ function App() {
         <ShowcaseSidebar query={query} onQueryChange={setQuery} groups={filteredNav} activeId={activeId} />
 
         <SidebarInset>
-          <header className="border-border bg-background/90 sticky top-0 z-10 flex items-center justify-between border-b px-6 py-3 backdrop-blur">
+          <header
+            className={cn(
+              'sticky top-0 z-10 flex items-center justify-between px-6 py-3 transition-colors',
+              scrolled && 'bg-background/90 backdrop-blur'
+            )}
+          >
             <div className="flex items-center gap-3">
               <SidebarTrigger />
               <CollapsedBrand />

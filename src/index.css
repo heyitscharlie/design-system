@@ -60,14 +60,23 @@
 :root {
   --radius: 4px;
   --destructive: #f87171;
-  /* Composed from the three tokens below rather than hardcoded per
-   * palette — since --background/--primary/--accent already vary per
-   * palette and mode, this one formula stays correct everywhere for
-   * free. Not a --color-* token: Tailwind's @theme inline color
-   * namespace generates bg-* utilities as `background-color`, which
-   * can't hold a gradient — use the bg-gradient-brand utility below,
-   * or `background: var(--gradient)` directly, instead. */
-  --gradient: linear-gradient(135deg, var(--background), var(--primary), var(--accent));
+  /* A soft mesh-style blend, not a hard-edged line: two large, soft
+   * accent-tinted blobs (opposite corners, heavily faded via color-mix
+   * so they read as a hint, not a hue) over a FLAT base of the current
+   * mode's own --background — not a light-to-dark span. A span toward
+   * --background-dark made light mode visibly darken toward one corner
+   * regardless of which mode was active; anchoring to --background
+   * instead means light mode stays exactly as light as --background
+   * already is, dark mode stays exactly as dark, and only the two
+   * blobs add any variation. Not a --color-* token: Tailwind's @theme
+   * inline color namespace generates bg-* utilities as
+   * `background-color`, which can't hold a gradient — use the
+   * bg-gradient-brand utility below, or `background: var(--gradient)`
+   * directly, instead. */
+  --gradient:
+    radial-gradient(at 15% 15%, color-mix(in oklch, var(--accent) 4%, transparent), transparent 50%),
+    radial-gradient(at 85% 85%, color-mix(in oklch, var(--accent) 3%, transparent), transparent 50%),
+    var(--background);
 }
 
 @utility bg-gradient-brand {

@@ -11,6 +11,11 @@
   --palette-font-mono: 'Fira Code', ui-monospace, 'SF Mono', Menlo, monospace;
 
   --background: #faf9f7;
+  /* Palette-constant — NOT redeclared in .dark below, so these hold this
+   * palette's own light/dark background regardless of which mode is
+   * currently active. Feeds --gradient in index.css. */
+  --background-light: #faf9f7;
+  --background-dark: #262626;
   --foreground: #151514;
   --card: #f0efec;
   --card-foreground: #151514;

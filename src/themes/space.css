@@ -11,6 +11,11 @@
   --palette-font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
   --background: #f6f5fa;
+  /* Palette-constant — NOT redeclared in .dark below, so these hold this
+   * palette's own light/dark background regardless of which mode is
+   * currently active. Feeds --gradient in index.css. */
+  --background-light: #f6f5fa;
+  --background-dark: #0f0d16;
   --foreground: #17162a;
   --card: #edecf4;
   --card-foreground: #17162a;

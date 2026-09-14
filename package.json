@@ -1,6 +1,6 @@
 {
-  "name": "@heyitscharliem/design-system",
-  "version": "0.0.5",
+  "name": "@heyitscharlie/design-system",
+  "version": "0.0.7",
   "description": "Charlie Martins' centralised design system — shared React components, tokens, and docs for future projects.",
   "type": "module",
   "license": "MIT",
@@ -48,6 +48,7 @@
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "oxlint": "^1.81.0",
+    "prism-react-renderer": "^2.4.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "shadcn": "^4.21.0",

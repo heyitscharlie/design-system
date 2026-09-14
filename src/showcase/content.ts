@@ -1,6 +1,7 @@
 import type { VariantProps } from 'class-variance-authority';
 import type { TypographyVariant } from '../design-system/typography';
 import type { buttonVariants } from '../design-system/ui/button';
+import type { cardVariants } from '../design-system/ui/card';
 
 /** Content for the showcase page (App.tsx) only — every piece of copy and
  * every list of tokens/variants the page displays, in one place. Kept
@@ -13,6 +14,85 @@ export const pageIntro = {
   title: 'Design System',
   description:
     "Shared React components for future projects — built on Tailwind CSS variables and shadcn/ui primitives. This page is the whole deliverable: the live components, styled by the real tokens below, in whichever theme you prefer.",
+};
+
+/** Copy for the "Getting Started" section — install + wire-up steps for
+ * someone consuming the published package, not building it. Kept in sync
+ * by hand with the README's "Using this package in another project"
+ * section; if one changes, check the other. */
+export const gettingStarted = {
+  intro:
+    "This package targets Tailwind CSS v4's CSS-first config (no tailwind.config.js). Two things are needed in a consuming project.",
+  installCommand: 'npm install @heyitscharlie/design-system',
+  stylesIntro:
+    "Import the design tokens. styles.css carries the color tokens (--background, --primary, --brand-ink, …), the mustard/space palettes, dark mode support, and font imports the components are styled against — without it, components render with classes that resolve to nothing. Import it once, from the consuming project's own global stylesheet, before anything else so later @theme/@source overrides in that file still apply.",
+  stylesCode: `/* app/globals.css (or equivalent) */
+@import "@heyitscharlie/design-system/styles.css";
+
+/* node_modules is excluded from Tailwind's automatic content
+ * detection by default — point it at this package's compiled
+ * output so its components' utility classes get generated. */
+@source "../node_modules/@heyitscharlie/design-system/dist";`,
+  stylesWarning:
+    'Don\'t add a separate @import "tailwindcss"; on top of this — styles.css already includes it; importing it twice in the same build risks duplicated output.',
+  usageIntro: 'Then use the components:',
+  usageCode: "import { Button, ThemeProvider } from '@heyitscharlie/design-system';",
+};
+
+/** Copy for the "Theming" section — how ThemeProvider/useTheme work, for
+ * someone wiring this package into their own app root. The live
+ * PaletteSwitcher/ModeToggle rendered alongside this copy are the same
+ * components used in this page's own header — documented here rather
+ * than left as unexplained chrome. */
+export const theming = {
+  intro:
+    "Every component is styled against two independent axes — light/dark mode, and a brand palette (mustard or space) — both controlled by one ThemeProvider. Wrap your app root once:",
+  providerCode: `import { ThemeProvider } from '@heyitscharlie/design-system';
+
+export default function App() {
+  return (
+    <ThemeProvider defaultMode="system" defaultPalette="mustard">
+      {/* ... */}
+    </ThemeProvider>
+  );
+}`,
+  hookIntro:
+    'Read or change the current theme from anywhere inside the provider with useTheme(). It returns the same shape ThemeProvider is configured with, plus setters:',
+  hookCode: `import { useTheme } from '@heyitscharlie/design-system';
+
+const { mode, palette, setMode, setPalette } = useTheme();
+// mode: 'light' | 'dark' | 'system'
+// palette: 'mustard' | 'space'`,
+  componentsIntro:
+    'ModeToggle and PaletteSwitcher are built on useTheme, ready to drop in — the same two controls in the header of this page:',
+  mechanismIntro:
+    "Under the hood, ThemeProvider applies a .dark class and a data-palette attribute to <html> to match the selectors defined in styles.css — mode defaults to following the OS and stays in sync if it changes, palette defaults to mustard (the attribute-less default) and persists to localStorage under the storageKey you pass (or 'design-system-theme').",
+};
+
+/** Copy for the standalone "Mode Toggle" component section — ModeToggle
+ * is also demoed live in Theming (alongside PaletteSwitcher, as the pair
+ * that theme setup actually needs), but it's a real exported component in
+ * its own right and gets its own Components entry for the same reason
+ * Button/Card/Toggle do. */
+export const modeToggleCopy = {
+  intro: 'A light/dark toggle button, built from the Button atom — the same one in this page\'s own header.',
+  usageCode: "import { ModeToggle } from '@heyitscharlie/design-system';",
+};
+
+/** Copy for the "Utils" group — hooks and helper functions the package
+ * exports alongside its components. */
+export const useThemeCopy = {
+  intro: 'Read or change the current theme from anywhere inside ThemeProvider — the same hook ModeToggle and PaletteSwitcher are built on. See Theming for the full ThemeProvider setup this depends on.',
+  usageCode: `import { useTheme } from '@heyitscharlie/design-system';
+
+const { mode, palette, setMode, setPalette } = useTheme();`,
+};
+
+export const useIsMobileCopy = {
+  intro: 'True below a 768px viewport width, kept in sync via a matchMedia listener — resize the window to see it flip live below.',
+  usageCode: `import { useIsMobile } from '@heyitscharlie/design-system';
+
+const isMobile = useIsMobile();`,
 };
 
 /** Small standalone strings that don't belong to any list above — the
@@ -93,10 +173,57 @@ export const buttonSizeSamples: ButtonSizeSample[] = [
 
 export const buttonDisabledLabel = 'Disabled';
 
-export const inputSamples: { placeholder: string; disabled?: boolean; invalid?: boolean; type?: string }[] = [
-  { placeholder: 'Email address', type: 'email' },
-  { placeholder: 'Disabled', disabled: true },
-  { placeholder: 'Invalid', invalid: true },
+export interface InputSample {
+  label: string;
+  placeholder: string;
+  disabled?: boolean;
+  invalid?: boolean;
+  type?: string;
+  defaultValue?: string;
+}
+
+export const inputSamples: InputSample[] = [
+  { label: 'Active', placeholder: 'Type something...' },
+  { label: 'Disabled', placeholder: 'Disabled', disabled: true },
+  { label: 'Invalid', placeholder: 'Invalid', invalid: true },
+  { label: 'Email', placeholder: 'you@example.com', type: 'email' },
+];
+
+export interface CardSample {
+  title: string;
+  description: string;
+  tags: string[];
+  variant: NonNullable<VariantProps<typeof cardVariants>['variant']>;
+}
+
+export const cardSamples: CardSample[] = [
+  {
+    title: 'Adipiscing Widget',
+    description:
+      'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.',
+    tags: ['Svelte', 'Tailwind'],
+    variant: 'primary',
+  },
+  {
+    title: 'Elit Runner',
+    description:
+      'Et harum quidem rerum facilis est et expedita distinctio nam libero tempore cum soluta nobis est eligendi optio cumque.',
+    tags: ['Go', 'Cobra'],
+    variant: 'primary-transparent',
+  },
+  {
+    title: 'Voluptas Engine',
+    description:
+      'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem.',
+    tags: ['Rust', 'Axum'],
+    variant: 'card-transparent',
+  },
+];
+
+export const toggleSamples: { label: string; defaultPressed?: boolean; disabled?: boolean }[] = [
+  { label: 'Bold' },
+  { label: 'Italic', defaultPressed: true },
+  { label: 'Disabled', disabled: true },
 ];
 
 /** The kinds of section body this page knows how to render — see
@@ -104,7 +231,21 @@ export const inputSamples: { placeholder: string; disabled?: boolean; invalid?: 
  * mapping. Adding a section means: add one entry here, one to a group
  * below, and one case to that mapping — nothing about the page's overall
  * structure (App.tsx) changes. */
-export type SectionKind = 'color' | 'typography' | 'spacing' | 'button' | 'input' | 'search-input';
+export type SectionKind =
+  | 'getting-started'
+  | 'theming'
+  | 'color'
+  | 'typography'
+  | 'spacing'
+  | 'button'
+  | 'input'
+  | 'mode-toggle'
+  | 'password-input'
+  | 'search-input'
+  | 'card'
+  | 'toggle'
+  | 'use-theme'
+  | 'use-is-mobile';
 
 export interface PageSection {
   id: string;
@@ -122,7 +263,15 @@ export interface PageGroup {
  * else hand-repeats a group/section name. */
 export const pageGroups: PageGroup[] = [
   {
-    label: 'Foundations',
+    label: 'Getting Started',
+    sections: [{ id: 'getting-started', title: 'Getting Started', kind: 'getting-started' }],
+  },
+  {
+    label: 'Theming',
+    sections: [{ id: 'theming', title: 'Theming', kind: 'theming' }],
+  },
+  {
+    label: 'Primitives',
     sections: [
       { id: 'color', title: 'Color', kind: 'color' },
       { id: 'typography', title: 'Typography', kind: 'typography' },
@@ -133,13 +282,24 @@ export const pageGroups: PageGroup[] = [
     label: 'Components',
     sections: [
       { id: 'button', title: 'Button', kind: 'button' },
+      { id: 'card', title: 'Card', kind: 'card' },
       { id: 'input', title: 'Input', kind: 'input' },
+      { id: 'mode-toggle', title: 'Mode Toggle', kind: 'mode-toggle' },
+      { id: 'password-input', title: 'Password Input', kind: 'password-input' },
       { id: 'search-input', title: 'Search Input', kind: 'search-input' },
+      { id: 'toggle', title: 'Toggle', kind: 'toggle' },
+    ],
+  },
+  {
+    label: 'Utils',
+    sections: [
+      { id: 'use-is-mobile', title: 'useIsMobile', kind: 'use-is-mobile' },
+      { id: 'use-theme', title: 'useTheme', kind: 'use-theme' },
     ],
   },
 ];
 
-/** "01 — foundations", "02 — components", ... — numbered by position, so
+/** "01 — getting started", "02 — theming", ... — numbered by position, so
  * reordering `pageGroups` renumbers the eyebrows for free instead of
  * needing a hand-edited number at each call site. */
 export function eyebrowFor(groupIndex: number, label: string): string {

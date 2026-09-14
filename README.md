@@ -1,4 +1,4 @@
-# @heyitscharliem/design-system
+# @heyitscharlie/design-system
 
 Centralised design system for Charlie Martins' projects — shared React components, styled with Tailwind CSS + shadcn/ui, published as a public npm package.
 
@@ -11,6 +11,7 @@ src/
   design-system/   published via src/index.ts — everything a consumer can import
     ui/            shadcn-sourced primitives (added via `npx shadcn add <name>`)
     lib/           utils (cn)
+    hooks/         published hooks (useIsMobile, ...)
     *.tsx          hand-written components (Typography, ThemeProvider, ...)
   showcase/        the showcase app only — never shipped in the npm package
     components/    showcase-specific components (Section, ColorSwatch, ...)
@@ -53,19 +54,19 @@ Outputs ESM + CJS bundles and type declarations to `dist/`, built only from `src
 This package targets Tailwind CSS v4's CSS-first config (no `tailwind.config.js`). Two things are needed in the consuming project:
 
 ```bash
-npm install @heyitscharliem/design-system
+npm install @heyitscharlie/design-system
 ```
 
 **1. Import the design tokens.** `styles.css` carries the color tokens (`--background`, `--primary`, `--brand-ink`, …), the mustard/space palettes, dark mode support, and font imports that the components are styled against — without it, components render with classes that resolve to nothing. Import it once, from the consuming project's own global stylesheet, *before* anything else so later `@theme`/`@source` overrides in that file still apply:
 
 ```css
 /* app/globals.css (or equivalent) of the consuming project */
-@import "@heyitscharliem/design-system/styles.css";
+@import "@heyitscharlie/design-system/styles.css";
 
 /* Tell Tailwind to also scan this package's compiled output for the
  * utility classes its components use — node_modules is excluded from
  * automatic content detection by default. */
-@source "../node_modules/@heyitscharliem/design-system/dist";
+@source "../node_modules/@heyitscharlie/design-system/dist";
 ```
 
 Don't add a separate `@import "tailwindcss";` on top of this — `styles.css` already includes it; importing it twice in the same build risks duplicated output.
@@ -73,12 +74,12 @@ Don't add a separate `@import "tailwindcss";` on top of this — `styles.css` al
 **2. Use the components:**
 
 ```tsx
-import { Button, ThemeProvider } from '@heyitscharliem/design-system';
+import { Button, ThemeProvider } from '@heyitscharlie/design-system';
 ```
 
 ## Publishing
 
-This is a **public, scoped** npm package (`publishConfig.access: "public"`). Publishing requires an npm account logged in as `heyitscharliem` (or a member of that scope).
+This is a **public, scoped** npm package (`publishConfig.access: "public"`). Publishing requires an npm account logged in as `heyitscharlie` (or a member of that scope).
 
 ```bash
 npm version patch|minor|major

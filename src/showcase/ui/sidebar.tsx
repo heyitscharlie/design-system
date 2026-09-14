@@ -16,7 +16,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
 import { Slot } from "radix-ui"
 
-import { useIsMobile } from "@/showcase/hooks/use-mobile"
+import { useIsMobile } from "@/design-system/hooks/use-mobile"
 import { Button } from "@/design-system/ui/button"
 import {
   Sheet,

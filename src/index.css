@@ -1,6 +1,10 @@
+/* Must precede @import "tailwindcss" — Tailwind's import expands into real
+ * CSS content inline, and a plain @import placed after real rules in the
+ * compiled output violates the spec ("@import rules must precede all rules
+ * aside from @charset and @layer"), which build tools warn on. */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 

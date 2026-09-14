@@ -1,6 +1,6 @@
-# @charlie-martins/design-system
+# @heyitscharliem/design-system
 
-Centralised design system for Charlie Martins' projects — shared React components, styled with Tailwind CSS + shadcn/ui, published as a private npm package.
+Centralised design system for Charlie Martins' projects — shared React components, styled with Tailwind CSS + shadcn/ui, published as a public npm package.
 
 The repo itself doubles as its own documentation: `npm run dev` runs a single-page showcase (sidebar nav, search, live components, a real light/dark toggle) instead of a separate tool like Storybook — the page *is* the deliverable.
 
@@ -29,30 +29,35 @@ Outputs ESM + CJS bundles and type declarations to `dist/`. React and the compon
 
 ## Using this package in another project
 
-Components use Tailwind utility classes rather than a compiled stylesheet — consuming projects must scan this package's `dist/` output with their own Tailwind config:
-
-```js
-// tailwind.config.js of the consuming project
-export default {
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@charlie-martins/design-system/dist/**/*.{js,mjs}',
-  ],
-};
-```
+This package targets Tailwind CSS v4's CSS-first config (no `tailwind.config.js`). Two things are needed in the consuming project:
 
 ```bash
-npm install @charlie-martins/design-system
+npm install @heyitscharliem/design-system
 ```
 
+**1. Import the design tokens.** `styles.css` carries the color tokens (`--background`, `--primary`, `--brand-ink`, …), the mustard/space palettes, dark mode support, and font imports that the components are styled against — without it, components render with classes that resolve to nothing. Import it once, from the consuming project's own global stylesheet, *before* anything else so later `@theme`/`@source` overrides in that file still apply:
+
+```css
+/* app/globals.css (or equivalent) of the consuming project */
+@import "@heyitscharliem/design-system/styles.css";
+
+/* Tell Tailwind to also scan this package's compiled output for the
+ * utility classes its components use — node_modules is excluded from
+ * automatic content detection by default. */
+@source "../node_modules/@heyitscharliem/design-system/dist";
+```
+
+Don't add a separate `@import "tailwindcss";` on top of this — `styles.css` already includes it; importing it twice in the same build risks duplicated output.
+
+**2. Use the components:**
+
 ```tsx
-import { Button, ThemeProvider } from '@charlie-martins/design-system';
+import { Button, ThemeProvider } from '@heyitscharliem/design-system';
 ```
 
 ## Publishing
 
-This is a **private, scoped** npm package (`publishConfig.access: "restricted"`). Publishing requires an npm account with access to the `@charlie-martins` scope (npm Pro/Teams for private scoped packages, or an npm org).
+This is a **public, scoped** npm package (`publishConfig.access: "public"`). Publishing requires an npm account logged in as `heyitscharliem` (or a member of that scope).
 
 ```bash
 npm version patch|minor|major

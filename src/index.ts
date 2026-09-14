@@ -4,10 +4,13 @@
 // covers it rather than needing it per source file.
 'use client';
 
-export { Button, buttonVariants } from './components/ui/button';
-export { Input } from './components/ui/input';
-export { ThemeProvider, useTheme } from './components/theme-provider';
-export type { ThemeMode, Palette, ThemeState } from './components/theme-provider';
-export { ModeToggle } from './components/mode-toggle';
-export { PaletteSwitcher } from './components/palette-switcher';
-export { cn } from './lib/utils';
+export { Button, buttonVariants } from './design-system/ui/button';
+export { Input } from './design-system/ui/input';
+export { SearchInput } from './design-system/search-input';
+export { Typography, Paragraph } from './design-system/typography';
+export type { TypographyVariant, TypographyProps } from './design-system/typography';
+export { ThemeProvider, useTheme } from './design-system/theme-provider';
+export type { ThemeMode, Palette, ThemeState } from './design-system/theme-provider';
+export { ModeToggle } from './design-system/mode-toggle';
+export { PaletteSwitcher } from './design-system/palette-switcher';
+export { cn } from './design-system/lib/utils';

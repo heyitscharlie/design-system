@@ -1,4 +1,4 @@
-import { cn } from '../lib/utils';
+import { cn } from './lib/utils';
 import { useTheme, type Palette } from './theme-provider';
 
 const palettes: { id: Palette; label: string; swatch: string }[] = [

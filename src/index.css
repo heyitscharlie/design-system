@@ -1,18 +1,28 @@
-/* Must precede @import "tailwindcss" — Tailwind's import expands into real
- * CSS content inline, and a plain @import placed after real rules in the
- * compiled output violates the spec ("@import rules must precede all rules
- * aside from @charset and @layer"), which build tools warn on. */
+/* The Google Fonts import must come first: once "tailwindcss" is inlined it
+ * injects real CSS rules, and no @import may follow another statement —
+ * that's also why the theme imports below sit here, not further down next
+ * to where you'd expect palette-specific things to live. */
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
 
 /* Two brand palettes ("mustard" and "space"), each with a dark (default)
  * and light token set — same shape as the heyitscharlie Claude Design
  * systems these values come from. Select with `data-palette="mustard" |
  * "space"` on <html> (or any ancestor); combine with `.dark` for the dark
- * variant. Defaults to mustard/light when neither is set. */
+ * variant. Defaults to mustard/light when neither is set.
+ *
+ * Each palette's actual color/font values live in their own file under
+ * themes/ — this file only declares the token *names* (below, via
+ * `@theme inline`) that Tailwind turns into utilities like `bg-primary`.
+ * To add a new palette: copy themes/space.css as a starting point, swap
+ * `data-palette='space'` for the new name, fill in values for every
+ * property already present (nothing here needs to change), then import
+ * the new file below. */
+@import "./themes/mustard.css";
+@import "./themes/space.css";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
@@ -33,15 +43,10 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  /* Accent used AS text/stroke/ring — never raw --primary. Raw accent is
-   * full-saturation and reserved for solid fills (button backgrounds,
-   * glows); as text it frequently fails contrast. --brand-ink is a
-   * ramp step tuned per ground (light step on dark, deep step on light)
-   * that clears AA — see the palette blocks below. */
-  --color-brand-ink: var(--brand-ink);
 
   --font-sans: var(--palette-font-body);
   --font-mono: var(--palette-font-mono);
+  --font-heading: var(--palette-font-heading);
 
   --radius-sm: var(--radius);
   --radius-md: var(--radius);
@@ -49,114 +54,20 @@
   --radius-xl: var(--radius);
 }
 
+/* Not palette-specific — shared by every theme file above. One fixed
+ * destructive red (the value the dark themes used) rather than a
+ * separate light-mode shade. */
 :root {
-  --radius: 2px;
-  --destructive: #dc2626;
-}
-.dark {
+  --radius: 4px;
   --destructive: #f87171;
 }
 
-/* ---- mustard (default) ---- */
-:root {
-  --palette-font-body: 'Archivo', system-ui, sans-serif;
-  --palette-font-heading: 'Archivo', system-ui, sans-serif;
-  --palette-font-heading-weight: 700;
-  --palette-font-mono: 'Fira Code', ui-monospace, 'SF Mono', Menlo, monospace;
-
-  --background: #faf9f7;
-  --foreground: #151514;
-  --card: #f0efec;
-  --card-foreground: #151514;
-  --popover: #e6e4e0;
-  --popover-foreground: #151514;
-  --primary: #f2b949;
-  --primary-foreground: #141311;
-  --secondary: #e6e4e0;
-  --secondary-foreground: #151514;
-  --muted: #e6e4e0;
-  --muted-foreground: #5a5a56;
-  --accent: #e6e4e0;
-  --accent-foreground: #151514;
-  --border: color-mix(in srgb, #151514 12%, transparent);
-  --input: color-mix(in srgb, #151514 12%, transparent);
-  --ring: var(--brand-ink);
-  /* accent-800 — accent-700 measures ~2.9:1 on this ground (fails AA); accent-800 clears 4.5:1 */
-  --brand-ink: #8f630a;
-}
-
-.dark {
-  --background: #262626;
-  --foreground: #f5f5f4;
-  --card: #2f2f2f;
-  --card-foreground: #f5f5f4;
-  --popover: #383838;
-  --popover-foreground: #f5f5f4;
-  --primary: #f2b949;
-  --primary-foreground: #141311;
-  --secondary: #383838;
-  --secondary-foreground: #f5f5f4;
-  --muted: #383838;
-  --muted-foreground: color-mix(in srgb, #f5f5f4 60%, transparent);
-  --accent: #383838;
-  --accent-foreground: #f5f5f4;
-  --border: color-mix(in srgb, #f5f5f4 12%, transparent);
-  --input: color-mix(in srgb, #f5f5f4 12%, transparent);
-  --ring: var(--brand-ink);
-  /* accent-300 — the lighter ramp step reads on a dark ground */
-  --brand-ink: #f8dba0;
-}
-
-/* ---- space ---- */
-:root[data-palette='space'] {
-  --palette-font-body: 'Manrope', system-ui, sans-serif;
-  --palette-font-heading: 'Space Grotesk', system-ui, sans-serif;
-  --palette-font-heading-weight: 700;
-  --palette-font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-
-  --background: #f6f5fa;
-  --foreground: #17162a;
-  --card: #edecf4;
-  --card-foreground: #17162a;
-  --popover: #e2e0eb;
-  --popover-foreground: #17162a;
-  --primary: #a710f9;
-  --primary-foreground: #f7f6fb;
-  --secondary: #e2e0eb;
-  --secondary-foreground: #17162a;
-  --muted: #e2e0eb;
-  --muted-foreground: #656175;
-  --accent: #2cdadd;
-  --accent-foreground: #17162a;
-  --border: color-mix(in srgb, #17162a 12%, transparent);
-  --input: color-mix(in srgb, #17162a 12%, transparent);
-  --ring: var(--brand-ink);
-  /* accent-800 — accent-700 measures under AA on this ground; accent-800 clears ~14:1 */
-  --brand-ink: #4b0372;
-}
-
-.dark[data-palette='space'] {
-  --background: #0f0d16;
-  --foreground: #f4f3f8;
-  --card: #151320;
-  --card-foreground: #f4f3f8;
-  --popover: #1e1c2c;
-  --popover-foreground: #f4f3f8;
-  --primary: #a710f9;
-  --primary-foreground: #f7f6fb;
-  --secondary: #1e1c2c;
-  --secondary-foreground: #f4f3f8;
-  --muted: #1e1c2c;
-  --muted-foreground: color-mix(in srgb, #f4f3f8 60%, transparent);
-  --accent: #2cdadd;
-  --accent-foreground: #0f0d16;
-  --border: color-mix(in srgb, #f4f3f8 12%, transparent);
-  --input: color-mix(in srgb, #f4f3f8 12%, transparent);
-  --ring: var(--brand-ink);
-  /* accent-300 — the lighter ramp step reads on a dark ground */
-  --brand-ink: #d183fc;
-}
-
+/* Heading font/weight is NOT applied here via a blanket h1-h4 selector —
+ * that's what caused the Typography showcase's "Heading" sample (a <span>,
+ * not an <h1>-<h4>) to silently render in the body font instead. The
+ * `Typography` component (src/components/typography.tsx) is the one place
+ * that applies `font-heading` + `--palette-font-heading-weight`; a bare
+ * `<h2>` outside that component intentionally gets no special styling. */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -165,11 +76,12 @@
     @apply bg-background text-foreground;
     font-family: var(--palette-font-body);
   }
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-family: var(--palette-font-heading);
-    font-weight: var(--palette-font-heading-weight);
+  /* Smooth-scrolls the nav's #anchor links. Gated behind
+   * prefers-reduced-motion so it doesn't fight people who've asked their
+   * OS to cut animation. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 }

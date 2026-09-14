@@ -1,0 +1,53 @@
+/* ---- space ----
+ * Selected via `data-palette="space"` on <html> (or any ancestor); combine
+ * with `.dark` for the dark variant. See index.css for the token names
+ * these values feed (the `@theme inline` block) and themes/mustard.css for
+ * the sibling (attribute-less, default) palette. */
+
+:root[data-palette='space'] {
+  --palette-font-body: 'Manrope', system-ui, sans-serif;
+  --palette-font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --palette-font-heading-weight: 700;
+  --palette-font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --background: #f6f5fa;
+  --foreground: #17162a;
+  --card: #edecf4;
+  --card-foreground: #17162a;
+  --popover: #e2e0eb;
+  --popover-foreground: #17162a;
+  --primary: #4b0372;
+  --primary-foreground: #f7f6fb;
+  --secondary: #e2e0eb;
+  --secondary-foreground: #17162a;
+  --muted: #e2e0eb;
+  --muted-foreground: #656175;
+  --accent: #a710f9;
+  /* white clears AA (4.78:1); the dark ink used elsewhere only clears 3.45:1 */
+  --accent-foreground: #f7f6fb;
+  --border: color-mix(in srgb, #17162a 12%, transparent);
+  --input: color-mix(in srgb, #17162a 12%, transparent);
+  --ring: var(--primary);
+}
+
+.dark[data-palette='space'] {
+  --background: #0f0d16;
+  --foreground: #f4f3f8;
+  --card: #151320;
+  --card-foreground: #f4f3f8;
+  --popover: #1e1c2c;
+  --popover-foreground: #f4f3f8;
+  /* white text on this lighter primary would only clear ~2.5:1 (fails AA);
+   * the dark background color clears 7.68:1. */
+  --primary: #d183fc;
+  --primary-foreground: #0f0d16;
+  --secondary: #1e1c2c;
+  --secondary-foreground: #f4f3f8;
+  --muted: #1e1c2c;
+  --muted-foreground: color-mix(in srgb, #f4f3f8 60%, transparent);
+  --accent: #da9cfd;
+  --accent-foreground: #0f0d16;
+  --border: color-mix(in srgb, #f4f3f8 12%, transparent);
+  --input: color-mix(in srgb, #f4f3f8 12%, transparent);
+  --ring: var(--primary);
+}

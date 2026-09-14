@@ -1,6 +1,6 @@
 {
   "name": "@heyitscharliem/design-system",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Charlie Martins' centralised design system — shared React components, tokens, and docs for future projects.",
   "type": "module",
   "license": "MIT",
@@ -10,7 +10,8 @@
   },
   "files": [
     "dist",
-    "src/index.css"
+    "src/index.css",
+    "src/themes"
   ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",

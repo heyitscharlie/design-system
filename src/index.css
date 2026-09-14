@@ -60,6 +60,18 @@
 :root {
   --radius: 4px;
   --destructive: #f87171;
+  /* Composed from the three tokens below rather than hardcoded per
+   * palette — since --background/--primary/--accent already vary per
+   * palette and mode, this one formula stays correct everywhere for
+   * free. Not a --color-* token: Tailwind's @theme inline color
+   * namespace generates bg-* utilities as `background-color`, which
+   * can't hold a gradient — use the bg-gradient-brand utility below,
+   * or `background: var(--gradient)` directly, instead. */
+  --gradient: linear-gradient(135deg, var(--background), var(--primary), var(--accent));
+}
+
+@utility bg-gradient-brand {
+  background-image: var(--gradient);
 }
 
 /* Heading font/weight is NOT applied here via a blanket h1-h4 selector —

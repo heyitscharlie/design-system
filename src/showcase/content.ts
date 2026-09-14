@@ -122,6 +122,7 @@ export const colorTokens: ColorToken[] = [
   { name: 'accent', var: '--accent' },
   { name: 'destructive', var: '--destructive' },
   { name: 'border', var: '--border' },
+  { name: 'gradient', var: '--gradient' },
 ];
 
 /** A curated subset of Tailwind's spacing scale (`--spacing` is defined by

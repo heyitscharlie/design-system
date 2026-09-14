@@ -48,7 +48,10 @@ function App() {
             </div>
           </header>
 
-          <main className="min-w-0 flex-1 px-8 py-12">
+          {/* Temporary: showing off the new gradient token live so it's
+           * easy to see and tune — swap back to no background class (or
+           * bg-background) once it's been dialed in. */}
+          <main className="bg-gradient-brand min-w-0 flex-1 px-8 py-12">
             <div className="mx-auto max-w-3xl">
               <div className="mb-12">
                 <Typography variant="h1">{pageIntro.title}</Typography>

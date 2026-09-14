@@ -193,7 +193,6 @@ export const inputSamples: InputSample[] = [
 export interface CardSample {
   title: string;
   description: string;
-  attribution: string;
   tags: string[];
   variant: NonNullable<VariantProps<typeof cardVariants>['variant']>;
 }
@@ -201,13 +200,13 @@ export interface CardSample {
 // Same title/description/tags across every sample, varying only `variant`
 // — a variant comparison needs identical content, or a height difference
 // from one sample's copy just happening to be longer reads as a sizing
-// bug in the component itself.
+// bug in the component itself. tags doubles as the quote's attribution
+// here — character name, then title + year — rather than a separate line.
 const CARD_SAMPLE_COPY = {
   title: 'Sample Card',
   description:
     'Striker, listen, and you listen close: flying a plane is no different than riding a bicycle, just a lot harder to put baseball cards in the spokes.',
-  attribution: '— Rex Kramer, Airplane! (1980)',
-  tags: ['Svelte', 'Tailwind'],
+  tags: ['Rex Kramer', 'Airplane! (1980)'],
 };
 
 export const cardSamples: CardSample[] = [

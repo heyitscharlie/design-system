@@ -9,7 +9,6 @@ export function CardSection() {
           <Card variant={sample.variant}>
             <CardTitle>{sample.title}</CardTitle>
             <CardDescription>{sample.description}</CardDescription>
-            <p className="text-sm opacity-70">{sample.attribution}</p>
             <CardFooter>
               {sample.tags.map((tag) => (
                 <span key={tag}>{tag}</span>

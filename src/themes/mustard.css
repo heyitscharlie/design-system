@@ -1,0 +1,52 @@
+/* ---- mustard (default) ----
+ * The attribute-less palette: applies via bare `:root`/`.dark`, no
+ * `data-palette` needed. See index.css for the token names these values
+ * feed (the `@theme inline` block) and themes/space.css for the sibling
+ * palette. */
+
+:root {
+  --palette-font-body: 'Archivo', system-ui, sans-serif;
+  --palette-font-heading: 'Archivo', system-ui, sans-serif;
+  --palette-font-heading-weight: 700;
+  --palette-font-mono: 'Fira Code', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --background: #faf9f7;
+  --foreground: #151514;
+  --card: #f0efec;
+  --card-foreground: #151514;
+  --popover: #e6e4e0;
+  --popover-foreground: #151514;
+  --primary: #f2b949;
+  --primary-foreground: #141311;
+  --secondary: #e6e4e0;
+  --secondary-foreground: #151514;
+  --muted: #e6e4e0;
+  --muted-foreground: #5a5a56;
+  --accent: #8f630a;
+  /* white clears AA (4.86:1); the dark ink used elsewhere only clears 3.44:1 */
+  --accent-foreground: #f5f5f4;
+  --border: color-mix(in srgb, #151514 12%, transparent);
+  --input: color-mix(in srgb, #151514 12%, transparent);
+  --ring: var(--accent);
+}
+
+.dark {
+  --background: #262626;
+  --foreground: #f5f5f4;
+  --card: #2f2f2f;
+  --card-foreground: #f5f5f4;
+  --popover: #383838;
+  --popover-foreground: #f5f5f4;
+  --primary: #f2b949;
+  --primary-foreground: #141311;
+  --secondary: #383838;
+  --secondary-foreground: #f5f5f4;
+  --muted: #383838;
+  --muted-foreground: color-mix(in srgb, #f5f5f4 60%, transparent);
+  --accent: #f8dba0;
+  /* dark ink clears 13.8:1 here; this light accent can't carry white text */
+  --accent-foreground: #141311;
+  --border: color-mix(in srgb, #f5f5f4 12%, transparent);
+  --input: color-mix(in srgb, #f5f5f4 12%, transparent);
+  --ring: var(--accent);
+}

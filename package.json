@@ -1,12 +1,12 @@
 {
-  "name": "@charlie-martins/design-system",
+  "name": "@heyitscharlie/design-system",
   "version": "0.0.1",
   "description": "Charlie Martins' centralised design system — shared React components, tokens, and docs for future projects.",
   "type": "module",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/charlie-martins/design-system.git"
+    "url": "git+https://github.com/heyitscharlie/design-system.git"
   },
   "files": [
     "dist"

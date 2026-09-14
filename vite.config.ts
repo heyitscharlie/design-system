@@ -14,7 +14,12 @@ export default defineConfig({
     dts({
       tsconfigPath: './tsconfig.app.json',
       include: ['src'],
-      exclude: ['src/App.tsx', 'src/main.tsx'],
+      // App-private code — never part of the published package. Not
+      // strictly required (nothing outside src/design-system is reachable
+      // from the src/index.ts entry anyway), but explicit here for the
+      // same reason src/App.tsx and src/main.tsx are: so it's obvious at
+      // a glance what this build does and doesn't ship.
+      exclude: ['src/App.tsx', 'src/main.tsx', 'src/showcase/**'],
     }),
   ],
   resolve: {
